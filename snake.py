@@ -15,6 +15,15 @@ def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
 
+def move_food():
+    directions=[vector(10,0),vector(-10,0),vector(0,10),vector(0,-10)]
+    move_direction=directions[randrange(len(directions))]
+    new_food_pos=food + move_direction
+
+    if inside(new_food_pos):
+        food.move(move_direction)
+
+    ontimer(move_food,1000)
 def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
@@ -43,6 +52,8 @@ def move():
     update()
     ontimer(move, 100)
 
+
+
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
@@ -52,5 +63,6 @@ onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
+move_food()
 done()
  
